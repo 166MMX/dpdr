@@ -1,4 +1,4 @@
-package name.harth.ddr.model
+package name.harth.dpdr.model.field
 
 enum Urgency {
     low,
