@@ -1,0 +1,10 @@
+2013 http://search.cpan.org/~ddumont/Config-Model-Dpkg-2.032/
+
+2012 http://search.cpan.org/~dam/DhMakePerl-0.76/
+2010 http://search.cpan.org/~jkutej/Parse-Deb-Control-0.04/
+2006 http://search.cpan.org/~bureado/Debian-Package-HTML-0.1/
+2005 http://search.cpan.org/~jaybonci/Parse-DebControl-2.005/
+
+2010 http://search.cpan.org/~whynot/Regexp-Common-debian-v0.2.11/
+
+https://github.com/gwenn/sqlite-dialect
