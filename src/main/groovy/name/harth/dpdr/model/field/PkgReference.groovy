@@ -1,4 +1,4 @@
 package name.harth.dpdr.model.field
 
-class PackageName {
+class PkgReference {
 }

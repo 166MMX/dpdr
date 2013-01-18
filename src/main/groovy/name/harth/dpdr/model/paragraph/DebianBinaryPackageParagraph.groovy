@@ -1,9 +1,9 @@
 package name.harth.dpdr.model.paragraph
 
 import name.harth.dpdr.model.field.Architecture
-import name.harth.dpdr.model.field.PackageName
-import name.harth.dpdr.model.field.PackageReference
-import name.harth.dpdr.model.field.PackageVersion
+import name.harth.dpdr.model.field.PkgName
+import name.harth.dpdr.model.field.PkgVersion
+import name.harth.dpdr.model.field.PkgReference
 import name.harth.dpdr.model.field.Priority
 import name.harth.dpdr.model.field.Section
 import name.harth.dpdr.model.field.UserDefined
@@ -11,30 +11,30 @@ import name.harth.dpdr.model.field.UserDefined
 import javax.mail.internet.InternetAddress
 
 class DebianBinaryPackageParagraph {
-    PackageName packageName
-    PackageName source
-    PackageVersion packageVersion
+    PkgName packageName
+    PkgReference source
+    PkgVersion packageVersion
     Section section
     Priority priority
     Architecture architecture
     boolean essential
-    PackageReference[] depends
-    PackageReference[] preDepends
-    PackageReference[] recommends
-    PackageReference[] suggests
-    PackageReference[] breaks
-    PackageReference[] conflicts
-    PackageReference[] provides
-    PackageReference[] replaces
-    PackageReference[] enhances
-    PackageReference[] buildDepends
-    PackageReference[] buildDependsIndep
-    PackageReference[] buildConflicts
-    PackageReference[] buildConflictsIndep
+    PkgReference[] depends
+    PkgReference[] preDepends
+    PkgReference[] recommends
+    PkgReference[] suggests
+    PkgReference[] breaks
+    PkgReference[] conflicts
+    PkgReference[] provides
+    PkgReference[] replaces
+    PkgReference[] enhances
+    PkgReference[] buildDepends
+    PkgReference[] buildDependsIndep
+    PkgReference[] buildConflicts
+    PkgReference[] buildConflictsIndep
     int installedSize
     InternetAddress maintainer
     String description
     URL homepage
-    PackageReference[] builtUsing
+    PkgReference[] builtUsing
     UserDefined[] userDefinedFields
 }

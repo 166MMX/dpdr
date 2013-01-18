@@ -7,10 +7,10 @@ import javax.mail.internet.InternetAddress
 class DebianChangesParagraph {
     String format
     Date date
-    PackageName source
-    PackageName[] binary
+    PkgReference source
+    PkgName[] binary
     Architecture architecture
-    PackageVersion packageVersion
+    PkgVersion packageVersion
     Distribution distribution
     Urgency urgency
     String urgencyComment

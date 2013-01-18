@@ -1,6 +1,6 @@
 package name.harth.dpdr.model.field
 
-class PackageVersion {
+class PkgVersion {
     String epoch
     String upstreamVersion
     String debianRevision

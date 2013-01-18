@@ -1,10 +1,10 @@
 package name.harth.dpdr.model.paragraph
 
 import name.harth.dpdr.model.field.Architecture
-import name.harth.dpdr.model.field.PackageReference
 import name.harth.dpdr.model.field.Md5Checksum
-import name.harth.dpdr.model.field.PackageName
-import name.harth.dpdr.model.field.PackageVersion
+import name.harth.dpdr.model.field.PkgName
+import name.harth.dpdr.model.field.PkgReference
+import name.harth.dpdr.model.field.PkgVersion
 import name.harth.dpdr.model.field.PolicyVersion
 import name.harth.dpdr.model.field.Sha1Checksum
 import name.harth.dpdr.model.field.Sha256Checksum
@@ -20,10 +20,10 @@ import javax.mail.internet.InternetAddress
 
 class DebianSourceParagraph {
     String format
-    PackageName source
-    PackageName[] binary
+    PkgName source
+    PkgName[] binary
     Architecture architecture
-    PackageVersion packageVersion
+    PkgVersion packageVersion
     InternetAddress maintainer
     InternetAddress[] uploaders
     boolean dmUploadAllowed
@@ -38,15 +38,15 @@ class DebianSourceParagraph {
     MonotoneScmProvider[] vcsMtn
     SvnExeScmProvider[] vcsSvn
     PolicyVersion standardsVersion
-    PackageReference[] depends
-    PackageReference[] preDepends
-    PackageReference[] recommends
-    PackageReference[] suggests
-    PackageReference[] breaks
-    PackageReference[] conflicts
-    PackageReference[] provides
-    PackageReference[] replaces
-    PackageReference[] enhances
+    PkgReference[] depends
+    PkgReference[] preDepends
+    PkgReference[] recommends
+    PkgReference[] suggests
+    PkgReference[] breaks
+    PkgReference[] conflicts
+    PkgReference[] provides
+    PkgReference[] replaces
+    PkgReference[] enhances
     Sha1Checksum[] checksumsSha1
     Sha256Checksum[] checksumsSha256
     Md5Checksum[] files
