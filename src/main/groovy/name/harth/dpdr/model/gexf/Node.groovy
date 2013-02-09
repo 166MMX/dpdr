@@ -9,4 +9,11 @@ class Node
     String name
 
     int id
+
+    private static int count = 0
+
+    Node()
+    {
+        id = count++
+    }
 }

@@ -1,13 +1,13 @@
 package name.harth.dpdr.model.gexf
 
-class SrcPkgNode extends Node
+class SrcPkgNode extends PkgNode
 {
     // Attributes
     // DP:   Format (mandatory)
     String format
 
     // DP:   DM-Upload-Allowed
-    boolean debianMaintainersUploadAllowed
+    boolean dmUploadAllowed
 
     // DP:   Standards-Version (recommended)
     String standardsVersion
@@ -27,20 +27,21 @@ class SrcPkgNode extends Node
 
     // Relationships
     // DP:   Uploaders
-    List<MaintainerNode> uploaders
+    List<MaintainerNode> uploaders = new ArrayList<MaintainerNode>()
 
     // DP:   Binary
-    List<BinPkgNode> binary
+    List<BinPkgNode> binary = new ArrayList<BinPkgNode>()
 
     // DP:   Build-Depends
-    List<BinPkgNode> buildDepends
+    List<BinPkgNode> buildDepends = new ArrayList<BinPkgNode>()
 
     // DP:   Build-Depends-Indep
-    List<BinPkgNode> buildDependsIndep
+    List<BinPkgNode> buildDependsIndep = new ArrayList<BinPkgNode>()
 
     // DP:   Build-Conflicts
-    List<BinPkgNode> buildConflicts
+    List<BinPkgNode> buildConflicts = new ArrayList<BinPkgNode>()
 
     // DP:   Build-Conflicts-Indep
-    List<BinPkgNode> buildConflictsIndep
+    List<BinPkgNode> buildConflictsIndep = new ArrayList<BinPkgNode>()
+
 }

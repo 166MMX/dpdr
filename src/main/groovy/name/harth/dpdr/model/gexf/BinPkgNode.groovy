@@ -1,11 +1,8 @@
 package name.harth.dpdr.model.gexf
 
-class BinPkgNode extends Node
+class BinPkgNode extends PkgNode
 {
     // Attributes
-    // DP:   Source
-    SrcPkgNode source
-
     // DP:   Essential
     boolean essential
 
@@ -36,27 +33,30 @@ class BinPkgNode extends Node
 
 
     // Relationships
+    // DPB:  Source
+    SrcPkgNode source
+
     // DPB:  Depends
-    List<BinPkgNode> depends
+    List<BinPkgNode> depends = new ArrayList<BinPkgNode>()
 
     // DPB:  Pre-Depends
-    List<BinPkgNode> preDepends
+    List<BinPkgNode> preDepends = new ArrayList<BinPkgNode>()
 
     // DPB:  Recommends
-    List<BinPkgNode> recommends
+    List<BinPkgNode> recommends = new ArrayList<BinPkgNode>()
 
     // DPB:  Suggests
-    List<BinPkgNode> suggests
+    List<BinPkgNode> suggests = new ArrayList<BinPkgNode>()
 
     // DPB:  Enhances
-    List<BinPkgNode> enhances
+    List<BinPkgNode> enhances = new ArrayList<BinPkgNode>()
 
     // DPB:  Breaks
-    List<BinPkgNode> breaks
+    List<BinPkgNode> breaks = new ArrayList<BinPkgNode>()
 
     // DPB:  Conflicts
-    List<BinPkgNode> conflicts
+    List<BinPkgNode> conflicts = new ArrayList<BinPkgNode>()
 
-    // DPB:   Built-Using
-    List<BinPkgNode> builtUsing
+    // DPB:  Built-Using
+    List<BinPkgNode> builtUsing = new ArrayList<BinPkgNode>()
 }
