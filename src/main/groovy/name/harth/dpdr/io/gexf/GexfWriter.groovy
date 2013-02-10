@@ -8,7 +8,7 @@ import name.harth.dpdr.model.gexf.SrcPkgNode
 
 class GexfWriter
 {
-    public static final int ATTR_INTERNET_ADDRESS = 0
+    public static final int NODE_ATTR_INTERNET_ADDRESS = 0
     public static final int ATTR_CHECKSUMS_SHA1 = 1
     public static final int ATTR_CHECKSUMS_SHA256 = 2
     public static final int ATTR_DM_UPLOAD_ALLOWED = 3
@@ -22,6 +22,8 @@ class GexfWriter
     public static final int ATTR_SECTION = 11
     public static final int ATTR_VERSION = 12
     public static final int ATTR_TYPE = 13
+    public static final int EDGE_ATTR_MAINTAINER = 0
+    public static final int EDGE_ATTR_UPLOADER = 1
 
     static void write (File file, List<Node> nodeList)
     {
@@ -39,9 +41,9 @@ class GexfWriter
                         mkp.yield 'Some random description'
                     }
                 }
-                graph(mode: 'static', defaultedgetype: 'directed') {
+                graph(mode: 'static', defaultedgetype: 'directed', idtype: 'integer') {
                     attributes(class:'node', mode:'static') {
-                        attribute(id:  ATTR_INTERNET_ADDRESS,   type:  'string',      title:  'e-mail Address')
+                        attribute(id:  NODE_ATTR_INTERNET_ADDRESS,   type:  'string',      title:  'e-mail Address')
                         attribute(id:  ATTR_CHECKSUMS_SHA1,     type:  'boolean',     title:  'SHA1 checksums')
                         attribute(id:  ATTR_CHECKSUMS_SHA256,   type:  'boolean',     title:  'SHA256 checksums')
                         attribute(id:  ATTR_DM_UPLOAD_ALLOWED,  type:  'boolean',     title:  'Debian maintainers upload allowed')
@@ -68,12 +70,25 @@ class GexfWriter
                             }
                         }
                     }
-                    nodes {
+                    attributes(class:'edge', mode:'static') {
+                        attribute(id:  EDGE_ATTR_MAINTAINER,    type:  'boolean',  title:  'Maintainer') {
+                            'default' {
+                                mkp.yield 'false'
+                            }
+                        }
+                        attribute(id:  EDGE_ATTR_UPLOADER,    type:  'boolean',  title:  'Uploader') {
+                            'default' {
+                                mkp.yield 'false'
+                            }
+                        }
+                    }
+                    nodes(count: nodeList.size()) {
                         buildNodes(it, nodeList)
                     }
-//                    edges {
-//                        buildEdges(it, nodeList)
-//                    }
+                    def edgeResult = buildEdges(it, nodeList)
+                    edges(count: edgeResult.count) {
+                        edgeResult.nodes
+                    }
                 }
             }
         }
@@ -84,23 +99,34 @@ class GexfWriter
         file.text = XmlUtil.serialize(object)
     }
 
-    static def buildEdges(def parent, List<Node> nodeList)
+    static def buildEdges(def root, List<Node> nodeList)
     {
         int counter = 0;
-        nodeList.each { model ->
+        def result = nodeList.each { model ->
             if (model instanceof MaintainerNode)
             {
                 return
             }
             else if (model instanceof SrcPkgNode)
             {
-                parent.edge(id: counter++, source: model.maintainer.id, target: model.id)
+                root.edge(id: counter++, source: model.maintainer.id, target: model.id) {
+                    attvalues {
+                        attvalue(for:  EDGE_ATTR_MAINTAINER,     value:  'true')
+                    }
+                }
                 model.uploaders.each { uploader ->
-                    parent.edge(id: counter++, source: uploader.id, target: model.id)
+                    root.edge(id: counter++, source: uploader.id, target: model.id) {
+                        attvalues {
+                            attvalue(for:  EDGE_ATTR_UPLOADER,     value:  'true')
+                        }
+                    }
                 }
             }
-
         }
+        return [
+            count: counter,
+            nodes: result
+        ]
     }
 
     static def buildNodes(def root, List<Node> nodeList)
@@ -122,7 +148,7 @@ class GexfWriter
     static def buildMaintainerNode(def root, MaintainerNode maintainerNode)
     {
         root.attvalues {
-            attvalue(for:  ATTR_INTERNET_ADDRESS,   value:  maintainerNode.address)
+            attvalue(for:  NODE_ATTR_INTERNET_ADDRESS,   value:  maintainerNode.address)
             attvalue(for:  ATTR_TYPE,               value:  'maintainer')
         }
     }
